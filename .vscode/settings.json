@@ -1,0 +1,6 @@
+{
+    "zenMode.hideStatusBar": true,
+    "editor.suggest.showStatusBar": true,
+    "debug.showInStatusBar": "always",
+    "problems.showCurrentInStatus": true
+}
