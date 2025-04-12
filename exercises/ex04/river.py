@@ -1,16 +1,21 @@
 """File to define River class."""
 
-from exercises.ex04.fish import Fish
-from exercises.ex04.bear import Bear
+__author__: str = "730824316"
+
+
+from exercises.EX04.fish import Fish
+from exercises.EX04.bear import Bear
 
 
 class River:
+    """Each River object has the following attributes."""
+
     day: int  # tells you day of the river's lifecycle
     bears: list[Bear]  # list of different bear
     fish: list[Fish]  # list of fish to represent river's fish population
 
     def __init__(self, num_fish: int, num_bears: int):
-        """New River with num_fish Fish and num_bears Bears"""
+        """New River with num_fish Fish and num_bears Bears."""
         self.day: int = 0
         self.fish: list[Fish] = []
         self.bears: list[Bear] = []
@@ -21,14 +26,14 @@ class River:
             self.bears.append(Bear())
 
     def check_ages(self):
-        """To keep bears that are 5 or younger"""
+        """To keep bears that are 5 or younger."""
         surviving_bear = []  # new list with only bear age 5 or younger
         for bears in self.bears:
             if bears.age <= 5:
                 surviving_bear.append(bears)  # populating new list
         self.bears = surviving_bear  # updating river bear population
 
-        """To keep fish that are younger than 3 years of age"""
+        """To keep fish that are younger than 3 years of age."""
         surviving_fish = []
         for fish in self.fish:  # for the vlaue in the list of fish created in fish.py
             if fish.age <= 3:
@@ -36,6 +41,7 @@ class River:
         self.fish = surviving_fish  # updating river bear population
 
     def bears_eating(self):
+        """Updating fish population according to bear's hunger."""
         for bear in self.bears:
             if len(self.fish) >= 5:
                 self.remove_fish(3)
@@ -43,6 +49,7 @@ class River:
         return None
 
     def check_hunger(self):
+        """Removing bears that haven't eaten any fish from river population of bears."""
         bears_left = []
         for bear in self.bears:
             if bear.hunger_score >= 0:
@@ -51,6 +58,7 @@ class River:
         return None
 
     def repopulate_fish(self):
+        """Adding fish offspring to river fish population."""
         # number of fish offspring to add
         fish_offspring_count: int = len(self.fish) // 2 * 4
         fish_added: int = 0
@@ -61,6 +69,7 @@ class River:
         return None
 
     def repopulate_bears(self):
+        """Adding Bear offspring to river bear population."""
         # number of new bears to add
         bears_offspring_count: int = len(self.bears) // 2
         bears_added: int = 0
@@ -71,14 +80,14 @@ class River:
         return None
 
     def view_river(self):
-        """Prints status of bear and fish populations in a given River object"""
+        """Prints status of bear and fish populations in a given River object."""
         print(f"~~~ Day {self.day}: ~~~")
         print(f"Fish population: {len(self.fish)}")
         print(f"Bear population: {len(self.bears)}")
         return None
 
     def one_river_day(self):
-        """Simulate one day of life in the river"""
+        """Simulate one day of life in the river."""
         # Increase day by 1
         self.day += 1
         # Simulate one day for all Bears
@@ -101,6 +110,7 @@ class River:
         self.view_river()
 
     def one_river_week(self):
+        """Updates River population for each day of the week."""
         self.one_river_day()
         self.one_river_day()
         self.one_river_day()
@@ -111,6 +121,7 @@ class River:
         return None
 
     def remove_fish(self, amount: int) -> None:
+        """Updating fish population from list of fish."""
         removed: int = 0
         while (
             removed < amount and self.fish
